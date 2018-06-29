@@ -1,0 +1,24 @@
+<form {{action "submit" on="submit"}}>
+  <fieldset>
+    <legend>
+      <h4>Login Form</h4>
+    </legend>
+
+    {{form-message-status message=formMessage}}
+
+    <label>Username</label><br>
+    {{input-control value=model.username
+                    errors=model.validationErrors.username
+    }}
+
+    <label>Password</label><br>
+    {{input-control value=model.password
+                    errors=model.validationErrors.password
+    }}
+
+    <div>
+      <button type="submit" disabled={{pending}}>Login</button>
+      <button {{action "cancel" }}>Reset</button>
+    </div>
+  </fieldset>
+</form>

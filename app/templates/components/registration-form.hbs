@@ -1,0 +1,44 @@
+<form {{action "submit" on="submit"}}>
+  <fieldset>
+    <legend><h4>Registration Form</h4></legend>
+
+    {{form-message-status message=formMessage}}
+
+    <label>First name</label><br>
+    {{input-control value=model.firstName
+                    errors=model.validationErrors.firstName
+    }}
+
+    <label>Last name</label><br>
+    {{input-control value=model.lastName
+                    errors=model.validationErrors.lastName
+    }}
+
+    <label>Username</label><br>
+    {{input-control value=model.username
+                    errors=model.validationErrors.username
+    }}
+
+    <label>Email</label><br>
+    {{input-control value=model.email
+                    errors=model.validationErrors.email
+    }}
+
+    <label>Password</label><br>
+    {{input-control type="password"
+                    value=model.password
+                    errors=model.validationErrors.password
+    }}
+
+    <label>Confirm password</label><br>
+    {{input-control type="password"
+                    value=model.passwordConfirmation
+                    errors=model.validationErrors.passwordConfirmation
+    }}
+
+    <div>
+      <button type="submit" disabled={{pending}}>Register</button>
+      <button {{action "cancel" }}>Reset</button>
+    </div>
+  </fieldset>
+</form>
