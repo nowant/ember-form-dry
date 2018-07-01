@@ -1,15 +1,9 @@
 import Mixin from '@ember/object/mixin';
-import {inject as service} from '@ember/service';
 
 /**
  * Abstracted AuthFormMixin is responsible to keep reusable behaviors
  */
 export default Mixin.create({
-  /**
-   * Ember's store service
-   */
-  store: service('store'),
-
   /**
    * Validation state
    */
@@ -100,8 +94,7 @@ export default Mixin.create({
   onCancelForm() {
     // clears current form message
     this.set('formMessage', '');
-    // creates and resets new model to flush current form data
-    this.createFormModel();
+    this.cancelForm();
   },
 
   /**
@@ -113,10 +106,10 @@ export default Mixin.create({
   },
 
   /**
-   * The method is responsible to create the concrete model of the concrete component
+   * The method is trigerred when the form has to be flushed
    * Not implemented
    */
-  createFormModel(data = {}) {
+  cancelForm() {
     return null;
   },
 

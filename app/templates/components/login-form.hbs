@@ -1,24 +1,24 @@
-<form {{action "submit" on="submit"}}>
-  <fieldset>
-    <legend>
-      <h4>Login Form</h4>
-    </legend>
 
-    {{form-message-status message=formMessage}}
+{{#auth-form api=api
+             submitAction="login"
+             model=model
+             formTitle="Login Form"
+             formSuccessMessage="Authorization is succeeded!"
+             formFailedMessage="Server error! Authorization is failed! Please retry later..."
+             submitButton="Login"
+             cancelButton="Reset"
+             onCancel="cancelForm"
+}}
+  {{#input-control value=model.username
+                   errors=model.validationErrors.username
+  }}
+    Username
+  {{/input-control}}
 
-    <label>Username</label><br>
-    {{input-control value=model.username
-                    errors=model.validationErrors.username
-    }}
-
-    <label>Password</label><br>
-    {{input-control value=model.password
-                    errors=model.validationErrors.password
-    }}
-
-    <div>
-      <button type="submit" disabled={{pending}}>Login</button>
-      <button {{action "cancel" }}>Reset</button>
-    </div>
-  </fieldset>
-</form>
+  {{#input-control type="password"
+                   value=model.password
+                   errors=model.validationErrors.password
+  }}
+    Password
+  {{/input-control}}
+{{/auth-form}}

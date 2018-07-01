@@ -1,0 +1,21 @@
+<form {{action "submit" on="submit"}}>
+  <fieldset>
+    <legend>
+      <h4>{{formTitle}}</h4>
+    </legend>
+
+    {{form-message-status message=formMessage}}
+
+    {{yield}}
+
+    <div>
+      <button type="submit"
+              disabled={{pending}}>
+        {{submitButton}}
+      </button>
+      <button {{action "cancel" }}>
+        {{cancelButton}}
+      </button>
+    </div>
+  </fieldset>
+</form>

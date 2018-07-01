@@ -1,8 +1,11 @@
 import Component from '@ember/component';
 import {inject as service} from '@ember/service';
-import AuthFormMixin from '../mixins/auth-form';
 
-export default Component.extend(AuthFormMixin, {
+export default Component.extend({
+  /**
+   * Ember's store service
+   */
+  store: service('store'),
   /**
    * Mocked api service
    */
@@ -22,23 +25,20 @@ export default Component.extend(AuthFormMixin, {
   },
 
   /**
-   * The method contains the concrete submitting form logic for the component
-   */
-  submitForm() {
-    this.api.register()
-      .then(
-        () => this.onSubmitSuccessResponse('Registration is succeeded!')
-      )
-      .catch(
-        () => this.onSubmitFailureResponse('Server error! Registration is failed! Please retry later...')
-      );
-  },
-
-  /**
    * The method creates and sets the concrete model for the component
    */
   createFormModel(data = {}) {
     const model = this.get('store').createRecord('registration', data);
     this.set('model', model);
+  },
+
+  /**
+   * To reset the form we need to recreate the form model
+   * https://github.com/emberjs/data/issues/4209
+   */
+  actions: {
+    cancelForm() {
+      this.createFormModel();
+    }
   }
 });
